@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>QR Access Example</title>
+  <script>
+    // Меняем под свой "секрет"
+    const SECRET_TOKEN = "secret123";
+
+    window.addEventListener("DOMContentLoaded", () => {
+      // Получим параметры адресной строки
+      const searchParams = new URLSearchParams(window.location.search);
+      const token = searchParams.get("token");
+
+      // Проверяем
+      if (token === SECRET_TOKEN) {
+        document.getElementById("content").style.display = "block";
+      } else {
+        document.getElementById("no-access").style.display = "block";
+      }
+    });
+  </script>
+</head>
+<body>
+  <!-- Блок, который по умолчанию скрыт, и отображается только если token правильный -->
+  <div id="content" style="display:none;">
+    <h1>Добро пожаловать!</h1>
+    <p>Содержимое сайта доступно только для тех, кто перешёл по QR-коду.</p>
+  </div>
+
+  <!-- Блок, который показывается, если токен не совпал -->
+  <div id="no-access" style="display:none;">
+    <h1>Нет доступа</h1>
+    <p>Кажется, вы не отсканировали QR-код с правильным токеном.</p>
+  </div>
+</body>
+</html>
